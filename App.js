@@ -8,18 +8,23 @@ import SignUp from './Components/SignUp';
 
 import Input from './Components/Input';
 import TabView from './navigation/TabView';
+import { AppProvider } from './Components/context';
+import ItemsPosted from './ListViews/ItemsPosted';
 // const AppContainer = createAppContainer(Navigator);
 const Stack = createNativeStackNavigator();
 const App = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="SignUp" component={SignUp} />
-        <Stack.Screen name="Input" component={Input} />
-        <Stack.Screen name="Tab" component={TabView} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppProvider>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Input" component={Input} />
+          <Stack.Screen name="Tab" component={TabView} />
+          <Stack.Screen name="Items Posted" component={ItemsPosted} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppProvider>
   );
 };
 

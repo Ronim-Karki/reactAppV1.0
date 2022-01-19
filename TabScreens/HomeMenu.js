@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Text,
   View,
@@ -11,11 +11,20 @@ import {
   RefreshControl,
 } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import { useGlobalContext } from '../Components/context';
 
 const HomeMenu = () => {
-  const [data, setData] = useState([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [cart, setCart] = useState([]);
+  const {
+    data,
+    cart,
+    createProduct,
+    setCart,
+    empty,
+    setisEmpty,
+    count,
+    setCount,
+  } = useGlobalContext();
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -23,28 +32,9 @@ const HomeMenu = () => {
     setRefreshing(true);
     wait(2000).then(() => setRefreshing(false));
   };
-  const url =
-    'https://rent-mate-91f5c-default-rtdb.firebaseio.com/products.json';
-  const createProduct = async () => {
-    try {
-      const response = await fetch(url);
-      const resData = await response.json();
-      const result = Object.values(resData);
-
-      if (result) {
-        setData(result);
-      } else {
-        new Error('The result is empty cant trigger rerender');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     createProduct();
   }, [refreshing]);
-
   return (
     <ScrollView
       refreshControl={
@@ -66,7 +56,13 @@ const HomeMenu = () => {
         <View style={styles.box}>
           {data.map((item) => {
             const addtoCart = () => {
-              setCart([item.id, item.title, item.imageUrl]);
+              const { id, title, imageUrl } = item;
+              if (empty) {
+                setCart([{ id, title, imageUrl }]);
+                setisEmpty(false);
+              } else {
+                setCart([{ id, title, imageUrl }, ...cart]);
+              }
             };
             console.log(item);
             console.log(cart);
