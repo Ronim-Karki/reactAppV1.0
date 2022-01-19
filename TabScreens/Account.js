@@ -13,6 +13,7 @@ const Account = ({ navigation }) => {
     { key: 'terms of Service' },
     { key: 'Sign Out' },
   ];
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -27,8 +28,16 @@ const Account = ({ navigation }) => {
           { key: 'Sign Out' },
         ]}
         renderItem={({ item, index }) => {
+          const press = (id) => {
+            if (id == 2) {
+              navigation.navigate('Items Posted');
+            }
+          };
           return (
-            <TouchableOpacity style={styles.smallbox}>
+            <TouchableOpacity
+              style={styles.smallbox}
+              onPress={() => press(index)}
+            >
               <Text key={index} style={styles.item}>
                 {item.key}
               </Text>

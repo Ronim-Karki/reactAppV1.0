@@ -225,25 +225,25 @@ const Post = () => {
         )}
 
         <TextInput
-          style={{ ...styles.textbox, width: '80%' }}
+          style={styles.textbox}
           placeholder="Title"
           value={title}
           onChangeText={(title) => setTitle(title)}
         />
         <TextInput
-          style={{ ...styles.textbox, width: '80%' }}
+          style={styles.textbox}
           value={description}
           placeholder="Description"
           onChangeText={(description) => setDescription(description)}
         />
         <TextInput
-          style={{ ...styles.textbox, width: '80%' }}
+          style={styles.textbox}
           placeholder="Category"
           value={category}
           onChangeText={(category) => setCategory(category)}
         />
         <TextInput
-          style={{ ...styles.textbox, width: '80%', marginBottom: 25 }}
+          style={{ ...styles.textbox, marginBottom: 25 }}
           placeholder="Price                           |Aud($) Amount"
           value={price}
           onChangeText={(price) => setPrice(price)}
@@ -271,8 +271,7 @@ const styles = StyleSheet.create({
   },
   textbox: {
     backgroundColor: 'white',
-    maxWidth: 400,
-    width: 380,
+    width: 350,
 
     height: 50,
     borderRadius: 10,

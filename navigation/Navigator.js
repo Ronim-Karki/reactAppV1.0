@@ -2,6 +2,7 @@ import SignUp from '../Components/SignUp';
 import Home from '../Components/Home';
 import HomeMenu from '../TabScreens/HomeMenu';
 import Input from '../Components/Input';
+import ItemsPosted from '../ListViews/ItemsPosted';
 
 const Navigator = createNativeStackNavigator(
   {
@@ -17,7 +18,11 @@ const Navigator = createNativeStackNavigator(
     HomeMenu: {
       screen: HomeMenu,
     },
+    ItemPosted: {
+      screen: ItemsPosted,
+    },
   },
+
   {
     initialRouteName: 'Home',
   }
